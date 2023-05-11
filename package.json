@@ -1,0 +1,44 @@
+{
+  "name": "ecommerce_backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VietNguyenDev/QLSV.git"
+  },
+  "keywords": [
+    "js",
+    "nodejs",
+    "mysql"
+  ],
+  "author": "VietNguyenDev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VietNguyenDev/Ecommerce_web/issues"
+  },
+  "homepage": "https://github.com/VietNguyenDev/Ecommerce_web#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cloudinary": "^1.36.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "enum": "^3.0.4",
+    "express": "^4.18.2",
+    "fs": "^0.0.1-security",
+    "joi": "^17.9.1",
+    "multer": "^1.4.5-lts.1",
+    "mysql2": "^3.2.3",
+    "nodemon": "^2.0.22",
+    "path": "^0.12.7",
+    "sequelize": "^6.31.0"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.6.0"
+  }
+}
