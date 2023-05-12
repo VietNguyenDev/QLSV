@@ -1,10 +1,10 @@
-import khoaModel from '../../model/khoa.model.js';
+import db from '../../model/index.js';
 
 import { abort } from '../../helpers/error.js';
 
 async function getAllKhoa() {
     try {
-        const data = await khoaModel.findAll();
+        const data = await db.models.Khoa.findAll();
 
         return data;
     } catch(error) {
@@ -14,7 +14,7 @@ async function getAllKhoa() {
 
 async function getKhoaById(id) {
     try {
-        const data = await khoaModel.findByPk(id);
+        const data = await db.models.Khoa.findByPk(id);
 
         if (!data) {
             return abort(400, 'Khoa not found');
@@ -28,13 +28,15 @@ async function getKhoaById(id) {
 
 async function createKhoa({id, name}) {
     try {
-        const khoa = await khoaModel.find({name});
+
+        console.log(name);
+        const khoa = await db.models.Khoa.findOne({where: {name}});
 
         if (khoa) {
             return abort(400, 'Khoa already exist');
         }
 
-        const data = await khoaModel.create({id, name});
+        const data = await db.models.Khoa.create({id, name});
 
         return data;
     } catch(error) {
@@ -44,13 +46,13 @@ async function createKhoa({id, name}) {
 
 async function updateKhoa(id, {name}) {
     try {
-        const khoa = await khoaModel.findByPk(id);
+        const khoa = await db.models.Khoa.findByPk(id);
 
         if (!khoa) {
             return abort(400, 'Khoa not found');
         }
 
-        const data = await khoaModel.update({name}, {where: {id}});
+        const data = await db.models.Khoa.update({name}, {where: {id}});
 
         return data;
     } catch(error) {
@@ -60,13 +62,13 @@ async function updateKhoa(id, {name}) {
 
 async function deleteKhoa(id) {
     try {
-        const khoa = await khoaModel.findByPk(id);
+        const khoa = await db.models.Khoa.findByPk(id);
 
         if (!khoa) {
             return abort(400, 'Khoa not found');
         }
 
-        const data = await khoaModel.destroy({where: {id}});
+        const data = await db.models.Khoa.destroy({where: {id}});
     } catch(error) {
         return abort(400, error.message);
     }
