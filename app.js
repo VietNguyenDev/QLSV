@@ -5,6 +5,7 @@ import cors from 'cors';
 
 import khoaRoutes from './src/routes/khoa.routes.js';
 import classRoutes from './src/routes/class.routes.js';
+import subjectRoutes from './src/routes/subject.routes.js';
 
 dotenv.config({ path: '.env' });
 
@@ -12,7 +13,9 @@ const app = express();
 const port = 8080;
 
 app.use(cors());
+// parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
+// parse application/json
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
@@ -21,6 +24,7 @@ app.get('/', (req, res) => {
 
 app.use('/khoa', khoaRoutes);
 app.use('/class', classRoutes);
+app.use('/subject', subjectRoutes);
   
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
