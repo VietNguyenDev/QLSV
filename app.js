@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 
 import khoaRoutes from './src/routes/khoa.routes.js';
+import classRoutes from './src/routes/class.routes.js';
 
 dotenv.config({ path: '.env' });
 
@@ -19,6 +20,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/khoa', khoaRoutes);
+app.use('/class', classRoutes);
   
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);

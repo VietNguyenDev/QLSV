@@ -5,6 +5,7 @@ import { abort } from '../../../helpers/error.js';
 export async function getDetailKhoa(req, res) {
     try {
         const { id } = req.params;
+        console.log(id);
         const data = await khoaService.getKhoaById(id);
 
         return res.status(200).send(data);
