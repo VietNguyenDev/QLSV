@@ -3,7 +3,7 @@ import sequelize from "./db.js";
 import khoaModel from "./khoa.model.js";
 import lopModel from "./class.model.js";
 import subjectModel from "./subject.model.js";
-
+import studentModel from "./student.model.js";
 
 
 
@@ -15,6 +15,7 @@ db.models = {};
 db.models.Khoa = khoaModel;
 db.models.Lop = lopModel;
 db.models.Subject = subjectModel;
+db.models.Student = studentModel;
 sequelize.authenticate().then(() => {
   console.log('Connection has been established successfully.');
 }).catch((error) => {
