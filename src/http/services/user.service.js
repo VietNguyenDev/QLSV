@@ -3,7 +3,7 @@ import { abort } from "../../helpers/error.js";
 
 async function getAllStudent() {
     try {
-        const data = await db.models.Student.findAll();
+        const data = await db.models.User.findAll({where: {role: 1}});
 
         return data;
     } catch (error) {
@@ -13,7 +13,11 @@ async function getAllStudent() {
 
 async function getStudentById(id) {
     try {
-        const data = await db.models.Student.findByPk(id);
+        const data = await db.models.User.findByPk(id);
+
+        if(!data) {
+            return abort(400, "Student not found");
+        }
 
         return data;
     } catch (error) {
@@ -23,7 +27,11 @@ async function getStudentById(id) {
 
 async function getStudentByName(fullName) {
     try {
-        const data = await db.models.Student.findOne({ where: { fullName } });
+        const data = await db.models.User.findOne({ where: { role: 1, fullName: fullName } });
+
+        if (!data) {
+            return abort(400, "Student not found");
+        }
 
         return data;
     } catch (error) {
@@ -31,9 +39,9 @@ async function getStudentByName(fullName) {
     }
 }
 
-async function createStudent({ id, fullName, dateOfBirth, idClass, idKhoa }) {
+async function createStudent({ id, fullName, dateOfBirth, idClass, idDepartment, password }) {
     try {
-        const student = await db.models.Student.findByPk(id);
+        const student = await db.models.User.findByPk(id);
 
         if (student) {
             return abort(400, "Student already exist");
@@ -45,18 +53,19 @@ async function createStudent({ id, fullName, dateOfBirth, idClass, idKhoa }) {
             return abort(400, "Class not found");
         }
 
-        const khoa = await db.models.Khoa.findByPk(idKhoa);
+        const khoa = await db.models.Department.findByPk(idDepartment);
 
         if (!khoa) {
-            return abort(400, "Khoa not found");
+            return abort(400, "Department not found");
         }
 
-        const data = await db.models.Student.create({
+        const data = await db.models.User.create({
             id,
             fullName,
             dateOfBirth,
             idClass,
-            idKhoa,
+            idDepartment,
+            password
         });
 
         return data;
@@ -65,11 +74,14 @@ async function createStudent({ id, fullName, dateOfBirth, idClass, idKhoa }) {
     } 
 }
 
-async function updateStudent(id, {fullName, dateOfBirth, idClass, idKhoa}) {
+async function updateStudent(id, {fullName, dateOfBirth, idClass, idDepartment}) {
     try {
-        const student = await db.models.Student.findByPk(id);
+        const user = await db.models.User.findByPk(id);
 
-        if (!student) {
+        if (!user) {
+            if(user.role != 1) {
+                return abort(400, "User is not student");
+            }
             return abort(400, "Student not found");
         }
 
@@ -79,15 +91,15 @@ async function updateStudent(id, {fullName, dateOfBirth, idClass, idKhoa}) {
             return abort(400, "Class not found");
         }
 
-        const khoa = await db.models.Khoa.findByPk(idKhoa);
+        const khoa = await db.models.Department.findByPk(idDepartment);
 
         if (!khoa) {
 
-            return abort(400, "Khoa not found");
+            return abort(400, "Department not found");
         }
 
-        const data = await db.models.Student.update({
-            fullName, dateOfBirth, idClass, idKhoa 
+        const data = await db.models.User.update({
+            fullName, dateOfBirth, idClass, idDepartment 
         },
            { 
                 where: { id } 
@@ -101,13 +113,13 @@ async function updateStudent(id, {fullName, dateOfBirth, idClass, idKhoa}) {
 
 async function deleteStudent(id) {
     try {
-        const student = await db.models.Student.findByPk(id);
+        const student = await db.models.User.findByPk(id);
 
         if (!student) {
             return abort(400, "Student not found");
         }
 
-        const data = await db.models.Student.destroy({ where: { id } });
+        const data = await db.models.User.destroy({ where: { id } });
 
         return data;
     } catch(error) {

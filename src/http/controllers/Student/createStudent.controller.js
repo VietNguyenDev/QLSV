@@ -1,16 +1,17 @@
-import studentService from "../../services/student.service.js";
+import userService from "../../services/user.service.js";
 import { abort } from "../../../helpers/error.js";
 
 export async function createStudent(req, res) {
     try {
-        const { id, fullName, dateOfBirth, idClass, idKhoa } = req.body;
+        const { id, fullName, dateOfBirth, idClass, idDepartment, password } = req.body;
 
-        const data = await studentService.createStudent({
+        const data = await userService.createStudent({
             id,
             fullName,
             dateOfBirth,
             idClass,
-            idKhoa,
+            idDepartment,
+            password
         });
 
         return res.status(200).send({

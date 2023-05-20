@@ -19,6 +19,9 @@ Subject.init({
     idTeacher: {
         type: DataTypes.INTEGER,
         allowNull: false
+    },
+    idSemester: {
+        type: DataTypes.INTEGER,
     }
 } , {
     sequelize,
