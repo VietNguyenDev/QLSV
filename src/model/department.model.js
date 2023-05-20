@@ -1,9 +1,9 @@
 import { Model, DataTypes } from 'sequelize';
 import sequelize from './db.js';
 
-class Lop extends Model{}
+class Department extends Model{}
 
-Lop.init({
+Department.init({
     id: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -12,16 +12,12 @@ Lop.init({
     name: {
         type: DataTypes.STRING,
         allowNull: false
-    },
-    idDepartment: {
-        type: DataTypes.INTEGER,
-        allowNull: false
     }
 }, {
     sequelize,
-    modelName: 'Lop',
-    tableName: 'lop',
+    modelName: 'Department',
+    tableName: 'department',
     timestamps: false
 });
 
-export default Lop;
+export default Department;

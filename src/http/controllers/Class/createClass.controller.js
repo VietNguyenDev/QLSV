@@ -4,9 +4,9 @@ import { abort } from "../../../helpers/error.js";
 
 export async function createClass(req, res) {
     try {
-        const { id, name, idKhoa } = req.body;
+        const { id, name, idDepartment } = req.body;
         
-        const classData = await classService.createClass({id, name, idKhoa});
+        const classData = await classService.createClass({id, name, idDepartment});
 
         return res.status(200).send(classData);
     } catch(error) {

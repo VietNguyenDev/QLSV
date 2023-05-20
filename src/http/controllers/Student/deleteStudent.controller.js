@@ -1,11 +1,11 @@
-import studentService from "../../services/student.service.js";
+import userService from "../../services/user.service.js";
 import { abort } from "../../../helpers/error.js";
 
 export async function deleteStudent(req, res) {
     try {
         const { id } = req.params;
 
-        const data = await studentService.deleteStudent(id);
+        const data = await userService.deleteStudent(id);
 
         return res.status(200).send({
             message: "Delete student successfully",

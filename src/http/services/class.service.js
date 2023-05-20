@@ -13,9 +13,9 @@ async function getAllClass() {
 }
 
 
-async function createClass({id, name, idKhoa}) {
+async function createClass({id, name, idDepartment}) {
     try {
-        const khoa = await db.models.Khoa.findByPk(idKhoa);
+        const khoa = await db.models.Department.findByPk(idDepartment);
         
         if (!khoa) {
             return abort(400, 'Khoa not found');
@@ -27,7 +27,7 @@ async function createClass({id, name, idKhoa}) {
             return abort(400, 'Class already exist');
         }
 
-        const data = await db.models.Lop.create({id, name, idKhoa});
+        const data = await db.models.Lop.create({id, name, idDepartment});
 
         return data;
     } catch(error) {

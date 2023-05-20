@@ -1,23 +1,22 @@
 import { Model, DataTypes } from 'sequelize';
 import sequelize from './db.js';
 
-class Khoa extends Model{}
-
-Khoa.init({
+class Semester extends Model {}
+Semester.init({
     id: {
         type: DataTypes.INTEGER,
+        primaryKey: true,
         allowNull: false,
-        primaryKey: true
     },
     name: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
     }
 }, {
     sequelize,
-    modelName: 'Khoa',
-    tableName: 'khoa',
-    timestamps: false
+    modelName: 'Semester',
+    tableName: 'Semester',
+    timestamps: false,
 });
 
-export default Khoa;
+export default Semester;
