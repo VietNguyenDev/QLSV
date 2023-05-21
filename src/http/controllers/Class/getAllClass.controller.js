@@ -1,5 +1,4 @@
 import classService from "../../services/class.service.js";
-
 import { abort } from "../../../helpers/error.js";
 
 export async function getAllClass(req, res) {

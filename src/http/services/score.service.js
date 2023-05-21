@@ -51,7 +51,7 @@ async function createScore({idStudent, idSubject, diemCC, diemGK, diemThi, diemT
     }
 }
 
-async function updateScore(idStudent, { idSubject, diemCC, diemGK, diemThi, idSemester }) {
+async function updateScore(idStudent, { idSubject, diemCC, diemGK, diemThi, diemTB, idSemester }) {
     try {
         
         const sinhVien = await db.models.User.findByPk(idStudent);
@@ -74,7 +74,7 @@ async function updateScore(idStudent, { idSubject, diemCC, diemGK, diemThi, idSe
             return abort(400, 'HocKy not found');
         }
 
-        const scoreData = await db.models.Score.update({idSubject, diemCC, diemGK, diemThi, idSemester}, {where: {idStudent}});
+        const scoreData = await db.models.Score.update({idSubject, diemCC, diemGK, diemThi, diemTB, idSemester}, {where: {idStudent}});
 
         return scoreData;
     } catch(error) {

@@ -1,5 +1,4 @@
 import departmentService from '../../services/department.service.js';
-
 import { abort } from '../../../helpers/error.js';
 
 export async function getAllDepartment(req, res) {
