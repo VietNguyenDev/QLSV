@@ -1,6 +1,6 @@
 import userService from "../../services/user.service.js";
 import { abort } from "../../../helpers/error.js";
-
+    
 export async function getAllStudent(req, res) {
     try {
         const data = await userService.getAllStudent();
